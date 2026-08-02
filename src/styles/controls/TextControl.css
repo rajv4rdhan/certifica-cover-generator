@@ -1,37 +1,51 @@
 .text-control {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .text-control label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: #000;
-  margin-bottom: 0.6rem;
+  color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 .text-control input,
 .text-control textarea {
   width: 100%;
-  padding: 0.7rem 0.9rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  font-family: inherit;
-  transition: all 0.15s ease;
-  background: #fafafa;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  background: var(--bg-primary);
+}
+
+.text-control input::placeholder,
+.text-control textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.text-control input:hover,
+.text-control textarea:hover {
+  border-color: var(--border-secondary);
 }
 
 .text-control input:focus,
 .text-control textarea:focus {
   outline: none;
-  border-color: #000;
-  background: #fff;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
 }
 
 .text-control textarea {
   resize: vertical;
-  min-height: 70px;
+  min-height: 72px;
+  line-height: 1.4;
 }

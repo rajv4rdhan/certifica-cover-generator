@@ -1,25 +1,54 @@
 .download-button {
-  padding: 0.75rem 2rem;
-  background: #000;
-  color: #fff;
+  padding: 0.95rem 2.5rem;
+  background: var(--accent);
+  color: var(--accent-contrast);
   border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
   cursor: pointer;
-  transition: all 0.15s ease;
-  letter-spacing: 0.3px;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 16px var(--accent-glow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .download-button:hover:not(:disabled) {
-  background: #333;
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px var(--accent-glow);
 }
 
 .download-button:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px var(--accent-glow);
 }
 
 .download-button:disabled {
-  opacity: 0.5;
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  border: 1px solid var(--border-primary);
+  box-shadow: none;
   cursor: not-allowed;
+}
+
+.download-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--text-muted);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

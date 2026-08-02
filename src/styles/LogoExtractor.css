@@ -1,70 +1,100 @@
 .logo-extractor {
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
-.logo-extractor h3 {
-  margin: 0 0 15px 0;
-  font-size: 18px;
-  color: #333;
+.logo-extractor-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .input-group {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 0.5rem;
 }
 
 .url-input {
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  transition: all var(--transition-fast);
+}
+
+.url-input::placeholder {
+  color: var(--text-muted);
+}
+
+.url-input:hover {
+  border-color: var(--border-secondary);
+}
+
+.url-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
 }
 
 .extract-button {
-  padding: 10px 20px;
-  background: #0066cc;
-  color: white;
+  padding: 0 1.25rem;
+  background: var(--accent);
+  color: var(--accent-contrast);
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   white-space: nowrap;
+  transition: all var(--transition-fast);
 }
 
-.extract-button:hover {
-  background: #0052a3;
+.extract-button:hover:not(:disabled) {
+  background: var(--accent-hover);
 }
 
 .extract-button:disabled {
-  background: #ccc;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-muted);
   cursor: not-allowed;
 }
 
 .error-message {
-  padding: 10px;
-  background: #fee;
-  color: #c33;
-  border-radius: 4px;
-  font-size: 14px;
-  margin-bottom: 10px;
+  padding: 0.6rem 0.8rem;
+  background: var(--error-bg);
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
 }
 
 .logo-preview {
-  margin-top: 10px;
-  padding: 10px;
-  background: #f9f9f9;
-  border-radius: 4px;
-  text-align: center;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-preview img {
-  max-width: 80px;
-  max-height: 80px;
+  max-width: 64px;
+  max-height: 64px;
   object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }

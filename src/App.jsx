@@ -13,6 +13,16 @@ function App() {
 
   return (
     <div className="app">
+      <header className="app-header">
+        <div className="header-brand">
+          <div className="brand-icon">C</div>
+          <span className="brand-title">Certifica Cover Studio</span>
+          
+        </div>
+        <div className="header-meta">
+          
+        </div>
+      </header>
       <div className="app-content">
         <BannerPreview config={config} />
         <ControlPanel config={config} updateConfig={updateConfig} />

@@ -48,7 +48,7 @@ function LogoExtractor({ updateConfig }) {
 
   return (
     <div className="logo-extractor">
-      <h3>Fetch Logo</h3>
+      <label className="logo-extractor-label">Extract Logo from Domain</label>
       
       <div className="input-group">
         <input

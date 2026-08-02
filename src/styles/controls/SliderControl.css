@@ -1,62 +1,89 @@
 .slider-control {
-  margin-bottom: 0;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .slider-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.5rem;
 }
 
 .slider-control label {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: #000;
+  color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 .slider-value {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #666;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
 }
 
 .slider-control input[type="range"] {
   width: 100%;
-  height: 4px;
-  border-radius: 2px;
-  background: #e0e0e0;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-primary);
   outline: none;
   -webkit-appearance: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
 }
 
+.slider-control input[type="range"]:hover {
+  background: var(--border-secondary);
+}
+
+/* Webkit browser slider thumb and track styles */
 .slider-control input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #000;
+  background: var(--accent);
+  border: 1px solid var(--accent-contrast);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .slider-control input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
+  background: var(--accent-hover);
 }
 
+.slider-control input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(0.9);
+}
+
+/* Mozilla Firefox slider thumb and track styles */
 .slider-control input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #000;
+  background: var(--accent);
+  border: 1px solid var(--accent-contrast);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  border: none;
-  transition: transform 0.15s ease;
+  transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .slider-control input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
+  background: var(--accent-hover);
+}
+
+.slider-control input[type="range"]::-moz-range-thumb:active {
+  transform: scale(0.9);
 }
