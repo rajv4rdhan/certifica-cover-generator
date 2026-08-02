@@ -1,15 +1,25 @@
-# Certificate Cover Generator
+# Blog Banner Template Tool
 
-A web app to generate custom certificate and announcement covers with automatic logo extraction from any website.
+A web application for creating standardized blog banner templates. Previously, creating blog banners required using Canva templates where editing the title and logo was tedious - especially the logo part, which involved finding logos from websites, copying them, pasting, and manually adjusting them. This tool automates that workflow by fetching logos directly from websites and allowing easy title customization.
+
+## Problem Solved
+
+Creating blog banners using Canva templates was time-consuming due to:
+- Manual logo extraction from company websites
+- Copy-paste workflow for logos
+- Tedious positioning and sizing adjustments
+
+This tool streamlines the process by automatically fetching logos from any website URL and providing an intuitive interface for title editing and customization.
 
 ## Features
 
-- 🎨 Customizable certificate covers with gradient backgrounds
-- 🏢 Automatic logo extraction from any company website
-- 📐 Adjustable logo scale and text sizes
-- 🎨 Multiple color palettes (Admit Card, Answer Key, Exchange Programs)
-- 📥 Download as PNG image
-- ⚡ Fast deployment on Cloudflare Pages
+- Automatic logo extraction from any website URL
+- Customizable text titles with adjustable sizes
+- Multiple color palette options for backgrounds
+- Logo scale adjustment controls
+- Real-time preview of banner design
+- Download as PNG image for immediate use
+- Fast deployment on Cloudflare Pages
 
 ## Tech Stack
 
@@ -33,40 +43,28 @@ A web app to generate custom certificate and announcement covers with automatic 
 3. **Open browser**:
    Navigate to `http://localhost:5173`
 
-**Note**: The logo extraction API (`/api`) won't work in local dev mode. Deploy to Cloudflare Pages to test it.
+**Note**: The logo extraction API requires deployment to Cloudflare Pages to function. It will not work in local development mode.
 
-## Deployment
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+## How to Use
 
-Quick deploy:
-```bash
-npm run deploy
-```
-
-Or connect your Git repo to Cloudflare Pages for automatic deployments.
-
-## Usage
-
-1. Enter a title for your certificate/announcement
-2. Select a background color palette from the dropdown
-3. Enter a website URL to extract the company logo
-4. Click "Fetch" to automatically get the logo
-5. Adjust logo scale and text sizes as needed
-6. Click "Download PNG" to save your cover
+1. Enter your blog banner title in the text field
+2. Select a background color palette from the dropdown menu
+3. Enter the website URL to automatically fetch the company logo
+4. Click "Fetch Logo" to extract and place the logo
+5. Use the slider controls to adjust logo scale and text sizes
+6. Preview your banner in real-time
+7. Click "Download PNG" to save your blog banner
 
 ## API Endpoint
 
-The logo extraction API is available at:
+The logo extraction API endpoint:
 ```
 /api?url=https://example.com
 ```
 
-Parameters:
-- `url` (required): The website URL to extract logo from
-- `direct=true` (optional): Return the logo image directly
-- `return=json` (optional): Return all logo candidates
+Available parameters:
+- `url` (required): Website URL to extract logo from
+- `direct=true` (optional): Returns the logo image directly
+- `return=json` (optional): Returns all logo candidates found
 
-## License
-
-MIT
