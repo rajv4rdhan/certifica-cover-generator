@@ -1,0 +1,37 @@
+.text-control {
+  margin-bottom: 1.5rem;
+}
+
+.text-control label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.text-control input,
+.text-control textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.15s ease;
+  background: #fafafa;
+}
+
+.text-control input:focus,
+.text-control textarea:focus {
+  outline: none;
+  border-color: #000;
+  background: #fff;
+}
+
+.text-control textarea {
+  resize: vertical;
+  min-height: 70px;
+}

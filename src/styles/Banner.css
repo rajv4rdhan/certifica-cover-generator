@@ -1,0 +1,115 @@
+.banner {
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.band-top {
+  flex: 1 1 48%;
+  background: var(--blue);
+}
+
+.band-bottom {
+  flex: 1 1 52%;
+  background: var(--green);
+}
+
+.card {
+  position: absolute;
+  top: 9%;
+  bottom: 9%;
+  left: 7%;
+  right: 7%;
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2%;
+  padding: 4% 6%;
+  overflow: hidden;
+}
+
+.space-above-logo {
+  flex: 0 1 4%;
+  width: 100%;
+}
+
+.logo-wrap {
+  flex: 0 1 36%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.logo-wrap img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.text-block {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5%;
+  min-height: 0;
+}
+
+.title {
+  color: #111;
+  font-family: 'Alike', 'Georgia', serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.15;
+  width: calc(var(--card-w) - 40px);
+  margin-left: calc(-1 * (var(--card-w) * 0.06 - 20px));
+  margin-right: calc(-1 * (var(--card-w) * 0.06 - 20px));
+  max-width: none;
+}
+
+.subtitle {
+  color: var(--gold);
+  font-family: 'Garet', 'Trebuchet MS', sans-serif;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cta-btn {
+  background: var(--red);
+  color: #fff;
+  font-family: 'Norwester', 'Arial Narrow', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 2.2% 6%;
+  box-shadow: 0 6px 14px rgba(216, 27, 74, 0.35);
+  white-space: nowrap;
+}
+
+.website {
+  color: #111;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
