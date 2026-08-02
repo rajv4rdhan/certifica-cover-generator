@@ -1,11 +1,4 @@
-/**
- * Cloudflare Worker to extract logo images from websites
- * 
- * Usage:
- * - GET /api?url=https://example.com - Extract logo from the given URL
- * - GET /api?url=https://example.com&return=json - Return JSON with all found logos
- * - GET /api?url=https://example.com&direct=true - Return the logo image directly
- */
+/// <reference types="@cloudflare/workers-types" />
 
 interface LogoCandidate {
 	url: string;
@@ -37,11 +30,9 @@ async function extractLogos(targetUrl: string): Promise<LogoCandidate[]> {
 	const candidates: LogoCandidate[] = [];
 	
 	try {
-		// Parse the target URL
 		const baseUrl = new URL(targetUrl);
 		const origin = baseUrl.origin;
 
-		// Fetch the website HTML
 		const response = await fetch(targetUrl, {
 			headers: {
 				'User-Agent': 'Mozilla/5.0 (compatible; LogoExtractorBot/1.0)',
@@ -54,7 +45,6 @@ async function extractLogos(targetUrl: string): Promise<LogoCandidate[]> {
 
 		const html = await response.text();
 
-		// 1. Check common logo paths directly
 		for (const pattern of LOGO_PATTERNS) {
 			const logoUrl = `${origin}${pattern}`;
 			candidates.push({
@@ -64,17 +54,13 @@ async function extractLogos(targetUrl: string): Promise<LogoCandidate[]> {
 			});
 		}
 
-		// 2. Extract from HTML - look for <img> tags with logo-related attributes
 		const imgRegex = /<img[^>]+>/gi;
 		const imgTags = html.match(imgRegex) || [];
 
 		for (const imgTag of imgTags) {
-			// Extract src attribute
 			const srcMatch = imgTag.match(/src=["']([^"']+)["']/i);
 			if (srcMatch) {
 				const src = srcMatch[1];
-				
-				// Check if it's logo-related
 				const isLogo = /logo|brand|site-logo|header-logo/i.test(imgTag);
 				
 				if (isLogo) {
@@ -88,7 +74,6 @@ async function extractLogos(targetUrl: string): Promise<LogoCandidate[]> {
 			}
 		}
 
-		// 3. Look for Open Graph image
 		const ogImageMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
 							 html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
 		if (ogImageMatch) {
@@ -100,7 +85,6 @@ async function extractLogos(targetUrl: string): Promise<LogoCandidate[]> {
 			});
 		}
 
-		// 4. Look for favicon
 		const faviconMatch = html.match(/<link[^>]+rel=["'](?:icon|shortcut icon)["'][^>]+href=["']([^"']+)["']/i) ||
 							 html.match(/<link[^>]+href=["']([^"']+)["'][^>]+rel=["'](?:icon|shortcut icon)["']/i);
 		if (faviconMatch) {
@@ -112,7 +96,6 @@ async function extractLogos(targetUrl: string): Promise<LogoCandidate[]> {
 			});
 		}
 
-		// 5. Look for apple-touch-icon
 		const appleTouchMatch = html.match(/<link[^>]+rel=["']apple-touch-icon["'][^>]+href=["']([^"']+)["']/i) ||
 							   html.match(/<link[^>]+href=["']([^"']+)["'][^>]+rel=["']apple-touch-icon["']/i);
 		if (appleTouchMatch) {
@@ -124,7 +107,6 @@ async function extractLogos(targetUrl: string): Promise<LogoCandidate[]> {
 			});
 		}
 
-		// 6. Look for schema.org logo
 		const schemaLogoMatch = html.match(/"logo"\s*:\s*"([^"]+)"/i);
 		if (schemaLogoMatch) {
 			const absoluteUrl = new URL(schemaLogoMatch[1], origin).href;
@@ -139,7 +121,6 @@ async function extractLogos(targetUrl: string): Promise<LogoCandidate[]> {
 		console.error('Error extracting logos:', error);
 	}
 
-	// Remove duplicates and sort by score
 	const uniqueLogos = Array.from(
 		new Map(candidates.map(c => [c.url, c])).values()
 	).sort((a, b) => b.score - a.score);
@@ -157,25 +138,23 @@ async function verifyImageExists(url: string): Promise<boolean> {
 	}
 }
 
-export async function handleLogoExtraction(request: Request): Promise<Response> {
+export async function onRequest(context: any): Promise<Response> {
+	const { request } = context;
 	const url = new URL(request.url);
 	const targetUrl = url.searchParams.get('url');
 	const returnJson = url.searchParams.get('return') === 'json';
 	const direct = url.searchParams.get('direct') === 'true';
 
-	// CORS headers
 	const corsHeaders = {
 		'Access-Control-Allow-Origin': '*',
 		'Access-Control-Allow-Methods': 'GET, OPTIONS',
 		'Access-Control-Allow-Headers': 'Content-Type',
 	};
 
-	// Handle OPTIONS request for CORS
 	if (request.method === 'OPTIONS') {
 		return new Response(null, { headers: corsHeaders });
 	}
 
-	// Show usage if no URL provided
 	if (!targetUrl) {
 		return new Response(
 			JSON.stringify({
@@ -199,7 +178,6 @@ export async function handleLogoExtraction(request: Request): Promise<Response> 
 		);
 	}
 
-	// Validate URL
 	try {
 		new URL(targetUrl);
 	} catch {
@@ -216,7 +194,6 @@ export async function handleLogoExtraction(request: Request): Promise<Response> 
 	}
 
 	try {
-		// Extract logos
 		const logos = await extractLogos(targetUrl);
 
 		if (logos.length === 0) {
@@ -235,7 +212,6 @@ export async function handleLogoExtraction(request: Request): Promise<Response> 
 			);
 		}
 
-		// Return JSON with all found logos
 		if (returnJson) {
 			return new Response(
 				JSON.stringify({
@@ -252,7 +228,6 @@ export async function handleLogoExtraction(request: Request): Promise<Response> 
 			);
 		}
 
-		// Find first valid logo
 		let validLogo: LogoCandidate | null = null;
 		for (const logo of logos) {
 			const exists = await verifyImageExists(logo.url);
@@ -279,7 +254,6 @@ export async function handleLogoExtraction(request: Request): Promise<Response> 
 			);
 		}
 
-		// Return the logo image directly
 		if (direct) {
 			const imageResponse = await fetch(validLogo.url);
 			const imageBlob = await imageResponse.blob();
@@ -293,7 +267,6 @@ export async function handleLogoExtraction(request: Request): Promise<Response> 
 			});
 		}
 
-		// Return JSON with the best logo
 		return new Response(
 			JSON.stringify({
 				url: targetUrl,

@@ -4,12 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run dev:pages & npm run dev:vite",
+    "dev:vite": "vite --config vite.config.dev.js",
+    "dev:pages": "wrangler pages dev dist --port=8788",
     "build": "vite build",
     "preview": "vite preview",
-    "worker:dev": "wrangler dev",
-    "worker:deploy": "wrangler deploy",
-    "worker:tail": "wrangler tail"
+    "deploy": "npm run build && wrangler pages deploy dist",
+    "deploy:pages": "wrangler pages deploy dist"
   },
   "dependencies": {
     "html-to-image": "^1.11.11",

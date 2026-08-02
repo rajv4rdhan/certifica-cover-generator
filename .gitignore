@@ -4,3 +4,10 @@ dist-ssr
 *.local
 
 .DS_Store
+
+# Wrangler
+.wrangler
+
+# Test
+test
+vitest.config.mts
